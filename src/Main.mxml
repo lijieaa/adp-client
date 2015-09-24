@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="windowedapplication1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			protected function helloService_resultHandler(event:ResultEvent):void
+			{
+				trace(event.result);
+			}
+			
+			protected function helloService_faultHandler(event:FaultEvent):void
+			{
+				trace(event.fault);
+			}
+			
+			protected function windowedapplication1_creationCompleteHandler(event:FlexEvent):void
+			{
+				helloService.hello("jay");
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<s:RemoteObject id="helloService" result="helloService_resultHandler(event)" fault="helloService_faultHandler(event)" destination="hello"/>
+	</fx:Declarations>
+</s:WindowedApplication>
